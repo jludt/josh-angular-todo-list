@@ -1,0 +1,12 @@
+<div>
+  <h2 class="text-blue" *ngIf="todoList?.length > 0">Today</h2>
+  <ol>
+  <li *ngFor="let todo of todoList">
+    <span> {{ todo.name }}
+      <p> {{ todo.description }} </p>
+      <button (click)="deleteTodo.emit(todo)">Delete</button>
+      <a [routerLink]="['update',todo.id]">Update</a>
+    </span>
+  </li>
+  </ol>
+</div>

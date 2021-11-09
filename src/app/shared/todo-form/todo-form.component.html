@@ -1,0 +1,12 @@
+<br/>
+<p>{{ todo | json }}</p>
+<section>
+  <label for="todo-name" >Name  </label>
+  <input #name name="todo-name" type="text" [value]="todo?.name"/>
+  <br/>
+  <label for="todo-description" type="text">Description</label>
+  <input #description name="todo-description" type="text" [value]="todo?.description"/>
+  <br/>
+  <br/>
+  <input type="button" value="Submit" (click)="submitTodo(name.value, description.value)"/>
+</section>

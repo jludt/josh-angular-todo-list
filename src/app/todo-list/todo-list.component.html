@@ -1,0 +1,16 @@
+<a [routerLink]="['add']">Add a new to-do</a>
+
+<!--<todo-list-presentation [todoList]="todoListData"></todo-list-presentation>-->
+<br />
+<br />
+<!-- {{ todoDelete$ | async | json }} -->
+
+<todo-list-presentation [todoList]="todoListData$ | async" (deleteTodo)="delete($event)"></todo-list-presentation>
+
+<br />
+
+<!--<p *ngFor="let planet of planetsToVisit$ | async">
+  {{ planet.name }}
+  <br />
+  Pop.{{ planet.population }}
+</p>-->
