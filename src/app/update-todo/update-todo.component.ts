@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
-import { TodoListService } from "../todo-list/todo-list.service";
+import { TodoListService } from "../shared/todo-list.service";
 
 @Component({
   selector: "app-update-todo",
