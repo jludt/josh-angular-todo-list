@@ -1,16 +1,16 @@
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Todo } from "../models/todo";
 
 @Component({
-  selector: 'todo-form',
-  templateUrl: './todo-form.component.html',
-  styleUrls: ['./todo-form.component.css']
+  selector: "todo-form",
+  templateUrl: "./todo-form.component.html",
+  styleUrls: ["./todo-form.component.css"],
 })
 export class TodoFormComponent implements OnInit {
-  @Output() changeTodoEvent = new EventEmitter();
-  @Input() todo: any;
+  @Output() changeTodoEvent = new EventEmitter<Todo>();
+  @Input() todo: Todo;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor() {}
 
   ngOnInit() {}
 

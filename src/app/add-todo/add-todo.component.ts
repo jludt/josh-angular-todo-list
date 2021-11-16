@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Todo } from "../shared/models/todo";
 import { TodoListService } from "../shared/todo-list.service";
 
 @Component({
@@ -12,8 +13,7 @@ export class AddTodoComponent implements OnInit {
 
   ngOnInit() {}
 
-  addTodo(todo) {
-    // DO STUFF
+  addTodo(todo: Todo) {
     const id = new Date().getTime();
     console.log("A new todo has been added!", todo);
     this.todoService.add(todo).subscribe();

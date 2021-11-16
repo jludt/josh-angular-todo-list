@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
+import { Todo } from "../shared/models/todo";
 import { TodoListService } from "../shared/todo-list.service";
 
 @Component({
@@ -10,7 +11,7 @@ import { TodoListService } from "../shared/todo-list.service";
   styleUrls: ["./update-todo.component.css"],
 })
 export class UpdateTodoComponent implements OnInit {
-  todo$: Observable<any>;
+  todo$: Observable<Todo>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,7 +24,7 @@ export class UpdateTodoComponent implements OnInit {
       switchMap((todoId) => this.todoService.getByID(todoId))
     );
   }
-  updateTodo(todo) {
+  updateTodo(todo: Todo) {
     this.todoService.update(todo).subscribe();
   }
 }
