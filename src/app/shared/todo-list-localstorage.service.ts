@@ -1,4 +1,3 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { EMPTY, Observable, of } from "rxjs";
 import { Todo, Todos } from "./models/todo";
@@ -15,7 +14,7 @@ export class TodoListLocalStorageService {
     window.localStorage.setItem(this.#KEY, JSON.stringify(todos));
   }
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   get(): Observable<Todos> {
     return of(this.#getFromLocalStorage());
@@ -31,14 +30,14 @@ export class TodoListLocalStorageService {
     this.#updateLocalStorage([...todos, todo]);
     return EMPTY;
   }
-  delete(todo) {
+  delete(todo: Todo) {
     const todos = this.#getFromLocalStorage().filter(
       (todoToUpdate) => todoToUpdate.id === todo.id
     );
     this.#updateLocalStorage(todos);
     return EMPTY;
   }
-  update(todo) {
+  update(todo: Todo) {
     const todos = this.#getFromLocalStorage().filter(
       (todoToUpdate) => todoToUpdate.id === todo.id
     );
