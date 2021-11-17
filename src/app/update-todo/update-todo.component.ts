@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { getSelectTodo } from "../state/todos.selectors";
+import { map, switchMap } from "rxjs/operators";
+import { Todo } from "../shared/models/todo";
+import { TodoListService } from "../shared/todo-list.service";
 
 @Component({
   selector: "app-update-todo",
@@ -10,18 +11,20 @@ import { getSelectTodo } from "../state/todos.selectors";
   styleUrls: ["./update-todo.component.css"],
 })
 export class UpdateTodoComponent implements OnInit {
-  todo$: Observable<any>;
+  todo$: Observable<Todo>;
 
-  constructor(private activatedRoute: ActivatedRoute, private store: Store) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private todoService: TodoListService
+  ) {}
 
   ngOnInit() {
-    this.todo$ = this.store.select(getSelectTodo);
-    // this.todo$ = this.activatedRoute.params.pipe(
-    //   map(route => route['todoId']),
-    //   switchMap(todoId => this.todoListService.getByID(todoId))
-    // );
+    this.todo$ = this.activatedRoute.params.pipe(
+      map((route) => route["todoId"]),
+      switchMap((todoId) => this.todoService.getByID(todoId))
+    );
   }
-  updateTodo(todo) {
-    // this.todoListService.update(todo).subscribe();
+  updateTodo(todo: Todo) {
+    this.todoService.update(todo).subscribe();
   }
 }

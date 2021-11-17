@@ -1,32 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { TodoListService, Planet } from './todo-list.service';
-import { Observable, Subject } from 'rxjs';
-import { concatMap, map, startWith } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { deleteTodo } from '../state/todo.actions';
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { Todo, Todos } from "../shared/models/todo";
+import { TodoListService } from "../shared/todo-list.service";
 
 @Component({
-  selector: 'todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  selector: "todo-list",
+  templateUrl: "./todo-list.component.html",
+  styleUrls: ["./todo-list.component.css"],
 })
 export class TodoListComponent implements OnInit {
-  todoListData$: Observable<any>;
-  planetsToVisit$: Observable<Planet[]>;
-  constructor(private store: Store) {}
-  todoDelete$ = new Subject();
+  todoListData$: Observable<Todos>;
+  constructor(private todoService: TodoListService) {}
 
   ngOnInit() {
-    //this.todoListData$ = this.todolistService.get();
-
-    this.todoListData$ = this.store.select(state => state['todo']);
+    this.todoListData$ = this.todoService.get();
   }
-  delete(todo) {
-    // this.todolistService
-    //   .delete(todo)
-    //   .subscribe(() => this.todoDelete$.next(todo));
-    // This did not properly update the todoListData$ obeservable
-    //this.todolistService.delete(todo).subscribe();
-    this.store.dispatch(deleteTodo({ id: todo.id }));
+
+  delete(todo: Todo) {
+    this.todoService.delete(todo).subscribe();
   }
 }
